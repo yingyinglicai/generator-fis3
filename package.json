@@ -1,0 +1,25 @@
+{
+  "name": "cool-nine",
+  "version": "1.0.0",
+  "description": "cool-nine website",
+  "main": "\"\"",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmcai/cool-nine.git"
+  },
+  "keywords": [
+    "cool-nine"
+  ],
+  "author": "mmcai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmcai/cool-nine/issues"
+  },
+  "homepage": "https://github.com/mmcai/cool-nine#readme",
+  "devDependencies": {
+    "rellax": "^0.1.0"
+  }
+}

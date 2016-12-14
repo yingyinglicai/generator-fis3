@@ -1,21 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-    <title>mod.js</title>
-    <script type="text/javascript" src="/static/lib/mod.js"></script>
-    <script type="text/javascript" src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/static/lib/bower_components/tether/dist/js/tether.min.js"></script>
-    <script type="text/javascript" src="/static/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>滚动</title>
+    <meta charset="gbk">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tencent-CP">
+    <meta name="Copyright" content="Tencent">
+    <meta name="Description" content="">
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
 
-    <link href="/static/lib/bower_components/tether/dist/js/tether.min.js" rel="stylesheet">
-    <link rel="stylesheet" href="/static/lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/style/index.css"/>
+        html, body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #main {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #1f1f1f;
+        }
+    </style>
 </head>
 <body>
-<p> Hello, World. </p>
-<button id="btn">load async js</button>
-<script src="/static/script/index.js"></script>
 
+<div id="main"></div>
 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+<script>
+    var a = document.querySelector('#main'), ctop = 65, tween, ty = 0, y = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        TweenMax.to(a, 1, {y: y});
+    }
+    window.onmousemove = function (e) {
+        var hei = document.documentElement.clientHeight;
+        if (e.clientY < ctop) {
+            y = ctop - e.clientY;
+            //animate(ty - e.clientY)
+        } else if (e.clientY > hei - ctop) {
+            y = -(ctop - Math.abs(e.clientY - hei));
+        } else {
+            y = 0;
+        }
+    };
+
+    requestAnimationFrame(animate);
+
+</script>
 </body>
+
+
 </html>
