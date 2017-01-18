@@ -7,56 +7,57 @@
     <meta name="author" content="Tencent-CP">
     <meta name="Copyright" content="Tencent">
     <meta name="Description" content="">
-    <style>
-        * {
-            margin: 0;
-            padding: 0
-        }
-
-        html, body {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        #main {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background: #1f1f1f;
-        }
-    </style>
+    <script src="static/script/lib/jquery.js"></script>
+    <script src="http://ami-static.b0.upaiyun.com/active2016/base/resLoader.js"></script>
+    <link rel="stylesheet" href="static/style/reset.css">
 </head>
 <body>
 
-<div id="main"></div>
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+<div class="loading-box">
+    <div class="loading-inner">
+        <div class="loading-ani-left"></div>
+        <div class="loading-ani-right"></div>
+    </div>
+</div>
 <script>
-    var a = document.querySelector('#main'), ctop = 65, tween, ty = 0, y = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        TweenMax.to(a, 1, {y: y});
-    }
-    window.onmousemove = function (e) {
-        var hei = document.documentElement.clientHeight;
-        if (e.clientY < ctop) {
-            y = ctop - e.clientY;
-            //animate(ty - e.clientY)
-        } else if (e.clientY > hei - ctop) {
-            y = -(ctop - Math.abs(e.clientY - hei));
-        } else {
-            y = 0;
+    var host = 'http://ami-static.b0.upaiyun.com/active2016/wk48RainPaper/1.1.0/imgs/';
+    var loader = new resLoader({
+        resources: [
+            host + 'hand-left.png',
+            host + 'hand-right.png',
+            host + 'pet-bg.png',
+            host + 'page-bg.png',
+            host + 'prize-dialog.png',
+            "http://c9-d.com/cn/static/imgs/logo-1-bg.png",
+            "http://c9-d.com/cn/static/imgs/logo-2-bg.png",
+            "http://c9-d.com/cn/static/imgs/logo-3-bg.png",
+            "http://c9-d.com/cn/static/imgs/logo-4-bg.png",
+            "http://c9-d.com/cn/static/imgs/logo-5-bg.png",
+            "http://c9-d.com/cn/static/imgs/logo-6-bg.png"
+        ],
+        onStart: function (total) {
+
+        },
+        onProgress: function (current, total) {
+            var percent = Math.ceil(current / total * 100);
+            var baseWid = 584;
+            var continueWid = percent / 100 * 584;
+            console.log(percent);
+
+            $(".loading-ani-right").css({
+                '-webkit-transform': "skew(135deg) translate(" + continueWid + "px, 0)"
+            });
+            $(".loading-ani-left").css({
+                '-webkit-transform': "skew(135deg) translate(" + -continueWid + "px, 0)"
+            });
+        },
+        onComplete: function (total) {
+            /*  setTimeout(function () {
+             $(".loading-box").remove();
+             }, 800);*/
         }
-    };
-
-    requestAnimationFrame(animate);
-
+    });
+    loader.start();
 </script>
 </body>
 
